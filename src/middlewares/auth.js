@@ -8,7 +8,7 @@ const userAuth = async (req, res, next) => {
     if (!token) {
       return res.status(401).send("You are not loggedIn");
     }
-    const decodedData = await jwt.verify(token, "Dev@Connect124");
+    const decodedData = await jwt.verify(token, process.env.JWT_SECRET);
     const { _id } = decodedData;
     const user = await User.findById({ _id: _id });
     if (!user) {
